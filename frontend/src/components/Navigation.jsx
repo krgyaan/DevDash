@@ -10,6 +10,8 @@ export default function Navigation() {
 
     const menuItems = [
         "Hackathons",
+        "CodeField",
+        "MeetUps",
         "Blog",
         "About",
         "Organize a hackathon",
@@ -114,7 +116,14 @@ export default function Navigation() {
                             <Link
                                 className="w-full text-2xl"
                                 color="foreground"
-                                href="#"
+                                href={
+                                    index === 1
+                                        ? "/code-field"
+                                        : (index === 5
+                                            ?
+                                            'https://gyaan.notion.site/Organizing-Hackathons-with-DevDash-1fa792502d20464cb612a93967fe7bab?pvs=4'
+                                            : `/${item.toLowerCase()}`)
+                                }
                                 size="lg"
                             >
                                 {item}

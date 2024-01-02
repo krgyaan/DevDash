@@ -4,7 +4,7 @@ import React from 'react'
 
 const HostEvents = () => {
     return (
-        <div className='bg-gradient-to-br from-[#e7f3ff99] to-[#fff8dfab] border-1 rounded-xl w-10/12 m-auto mb-10'>
+        <div className='bg-gradient-to-br from-[#e7f3ff99] to-[#fff8dfab] border-1 rounded-xl w-10/12 m-auto my-16'>
             <div className='flex items-center justify-evenly gap-10 flex-col sm:flex-col md:flex-row md:py-16 py-8 md:px-10 px-5'> 
                 <div className="md:w-1/2 w-100 flex flex-col gap-5 pl-0 md:pl-5">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl flex flex-col gap-2 font-semibold">
