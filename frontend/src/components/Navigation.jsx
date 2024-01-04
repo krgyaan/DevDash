@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuItem, NavbarMenuToggle, NavbarMenu, Avatar } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuItem, NavbarMenuToggle, NavbarMenu, Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Divider } from "@nextui-org/react";
 
-import { SignOutButton, SignInButton, SignedIn, SignedOut, UserProfile, UserButton } from "@clerk/clerk-react"
+import { SignOutButton, SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react"
 
 
 export default function Navigation() {
+    const { user } = useUser();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const menuItems = [
         "Hackathons",
+        "CodeField",
+        "MeetUps",
         "Blog",
         "About",
         "Organize a hackathon",
@@ -65,7 +68,45 @@ export default function Navigation() {
                     <NavbarContent justify="end">
                         <NavbarItem>
                             {/* <SignOutButton afterSignOutUrl="/" /> */}
-                            <UserButton afterSignOutUrl="/" />
+                            {/* <UserButton afterSignOutUrl="/" userProfileUrl='/'/> */}
+                            <Dropdown placement="bottom-end">
+                                <DropdownTrigger>
+                                    <Avatar
+                                        isBordered
+                                        as="button"
+                                        className="transition-transform"
+                                        src={user?.imageUrl}
+                                    />
+                                </DropdownTrigger>
+                                <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                    <DropdownItem key="profile" className="h-14 gap-2">
+                                        <p className="font-semibold">
+                                            Hi! {user?.firstName}
+                                        </p>
+                                        <p className="font-medium">
+                                            {user?.emailAddresses[0].emailAddress}
+                                        </p>
+                                    </DropdownItem>
+                                    <DropdownItem key="detail">
+                                        <Link href="/profile" color="foreground">Profile</Link>
+                                    </DropdownItem>
+                                    <DropdownItem key="hackathons">
+                                        <Link href="/hackathons" color="foreground">Hackathon</Link>
+                                    </DropdownItem>
+                                    <DropdownItem key="projects">
+                                        <Link href="/projects" color="foreground">Project</Link>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <Divider />
+                                    </DropdownItem>
+                                    <DropdownItem key="organize">
+                                        <Link href="https://gyaan.notion.site/Organizing-Hackathons-with-DevDash-1fa792502d20464cb612a93967fe7bab?pvs=4" color="foreground">Organize a Hackathon</Link>
+                                    </DropdownItem>
+                                    <DropdownItem key="logout" color="danger">
+                                        <SignOutButton afterSignOutUrl="/" />
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
                         </NavbarItem>
                     </NavbarContent>
                 </SignedIn>
@@ -75,7 +116,14 @@ export default function Navigation() {
                             <Link
                                 className="w-full text-2xl"
                                 color="foreground"
-                                href="#"
+                                href={
+                                    index === 1
+                                        ? "/code-field"
+                                        : (index === 5
+                                            ?
+                                            'https://gyaan.notion.site/Organizing-Hackathons-with-DevDash-1fa792502d20464cb612a93967fe7bab?pvs=4'
+                                            : `/${item.toLowerCase()}`)
+                                }
                                 size="lg"
                             >
                                 {item}
