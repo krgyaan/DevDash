@@ -13,7 +13,7 @@ const codespace = [
         description: 'Java,C,C++,Python',
         availavlity: 'Free',
         image: 'https://img.icons8.com/plasticine/400/java-coffee-cup-logo.png',
-        link: 'https://www.w3schools.com/java/default.asp'
+        link: '/code-field/compiler'
     },
 
 

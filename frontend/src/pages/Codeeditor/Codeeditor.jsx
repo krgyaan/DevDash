@@ -74,7 +74,6 @@ function Codeeditor() {
                             height="20rem"
                             onChange={onChangeHtml}
 
-                            extensions={[html(true)]}
                             theme={dracula}
                             basicSetup={{
                                 foldGutter: true,

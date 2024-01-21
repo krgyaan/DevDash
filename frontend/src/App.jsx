@@ -12,6 +12,7 @@ import Past from './pages/Hackathon/Past';
 import CodeField from './pages/CodeField/CodeField';
 import MeetUp from './pages/MeetUp/MeetUp';
 import Codeeditor from './pages/Codeeditor/Codeeditor';
+import Compiler from './pages/Codeeditor/codeCompiler'
 
 function App() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function App() {
           <Route path="/code-field" element={<CodeField />} />
           <Route path="/meet-ups" element={<MeetUp />} />
           <Route path="/code-field/codeeditor" element={<Codeeditor/>} />
+          <Route path="/code-field/compiler" element={<Compiler/>} />
 
         </Routes>
         <Footer />
