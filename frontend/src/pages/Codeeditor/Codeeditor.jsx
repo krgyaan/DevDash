@@ -46,11 +46,11 @@ function Codeeditor() {
 
     return (
         
-            <Split className="h-screen  mx-auto" direction="vertical">
+            <Split className="h-100  mx-auto" direction="vertical">
                 <Split className="flex flex-wrap w-100">
 
 
-                    <Card className="w-1/3 bg-black "
+                    <Card className="w-1/3 bg-black"
                         radius="none">
                         <CardHeader className="bg-gray-900 h-10 flex justify-between" >
                             <Image src={htmllogo} width={45} />

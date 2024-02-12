@@ -17,8 +17,9 @@ const Compiler = () => {
     const [code, setCode] = useState('');
     const [language, setLanguage] = useState('c');
     const [output, setOutput] = useState('');
-    const [outputStatusUrl, setoutputStatusUrl] = useState('')
-    const [outputUrl, setoutputUrl] = useState('')
+    const [outputStatusUrl, setoutputStatusUrl] = useState('');
+    const [outputUrl, setoutputUrl] = useState('');
+    const[indexValue,setIndexvalue] = useState(1)
 
     const handleLanguageChange = (newLanguage) => {
         setLanguage(newLanguage);
@@ -34,9 +35,9 @@ const Compiler = () => {
             lang: language.toUpperCase(),
             source: code,
             input: '',
-           
+
         };
-       
+
         const codeStatusBody = {
             lang: language.toUpperCase(),
             source: code,
@@ -46,8 +47,8 @@ const Compiler = () => {
             context: { id: 213121 },
             callback: '',
         };
-       
-        
+
+
 
         const apiUrl = 'https://api.hackerearth.com/v4/partner/code-evaluation/submissions';
         const secretKey = '826d54e2db47c5e1ebba191705dd00bfbcc9a61f';
@@ -59,10 +60,10 @@ const Compiler = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    
+
                 },
-                body: JSON.stringify({codeStatusBody}),
-                
+                body: JSON.stringify({ codeStatusBody }),
+
             });
             console.log("step 1 cleaar")
             const submissionData = await submissionResponse.json();
@@ -100,75 +101,110 @@ const Compiler = () => {
         }
     }
 
-        
+ 
 
-    
+
 
 
 
 
     return (
-        <section className="h-screen flex w-screen bg-black">
-            <Card radius='none' className='w-3/6 p-0 h-full bg-white'>
-                <CardHeader className='h-18 items-center flex justify-between bg-gray-900 '>
-                    <div className="main px-4 h-12 p-2 text-center text-white ">Main</div>
-                    <div className="buttons flex h-full gap-4">
+        <>
+            <ul
+                class="mb-5 flex list-none flex-row justify-center flex-wrap pl-0 lg:hidden "
+                id="pills-tab"
+                role="tablist"
+                data-te-nav-ref>
+                <li role="presentation" onClick={()=>setIndexvalue(1)}>
+                    <a
+                        href="#card1"
+                        className={indexValue===1?"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400":"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"}                        id="pills-home-tab"
+                        data-te-toggle="pill"
+                        data-te-target="#card1"
+                        data-te-nav-active
+                        role="tab"
+                        aria-controls="pills-home"
+                        aria-selected="true"
+                    >Home</a
+                    >
+                </li>
+                <li role="presentation"  onClick={()=>setIndexvalue(2)}>
+                    <a
+                        href="#card2"
+                        className={indexValue===2?"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400":"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"}
+                        id="pills-profile-tab"
+                        data-te-toggle="pill"
+                        data-te-target="#card2"
+                        role="tab"
+                        aria-controls="pills-profile"
+                        aria-selected="false"
+                    >Profile</a
+                    >
+                </li>
+            </ul>
+            <section className="h-screen flex w-screen bg-black">
 
-                        <Select
-                            value={language}
-                            onChange={(e) => handleLanguageChange(e.target.value)}
-                            label="Language"
-                            size='sm'
-                            className="w-40 p-0 h-full"
-                        >
-                            {console.log(language)}
-                            <SelectItem key='cpp' value='cpp'>
-                                C++
-                            </SelectItem>
-                            <SelectItem key='python' value='python'>
-                                Python
-                            </SelectItem>
-                            <SelectItem key='java' value='java'>
-                                Java
-                            </SelectItem>
 
-                        </Select>
-                        <Button className="border-none h-12" isIconOnly size='sm'>
-                            <LightModeIcon />
-                        </Button>
-                        <Button className="border-none h-12" onClick={compileCode} isIconOnly size='sm'>
-                            <PlayArrowIcon />
-                        </Button>
+                <Card radius='none' className={indexValue===1?'lg:w-3/6 w-full p-0 h-full bg-white z-10':'lg:w-3/6 w-full p-0 h-full lg:bg-white z-10 hidden'}>
+                    <CardHeader className='h-18 items-center flex justify-between bg-gray-900 '>
+                        <div className="main px-4 h-12 p-2 text-center text-white ">Main</div>
+                        <div className="buttons flex h-full gap-4">
 
-                    </div>
+                            <Select
+                                value={language}
+                                onChange={(e) => handleLanguageChange(e.target.value)}
+                                label="Language"
+                                size='sm'
+                                className="w-40 p-0 h-full"
+                            >
+                                {console.log(language)}
+                                <SelectItem key='cpp' value='cpp'>
+                                    C++
+                                </SelectItem>
+                                <SelectItem key='python' value='python'>
+                                    Python
+                                </SelectItem>
+                                <SelectItem key='java' value='java'>
+                                    Java
+                                </SelectItem>
 
-                </CardHeader>
-                <CardBody className='p-0'>
-                <CodeMirror
-                        className='text-lg'
-                        height='41rem'
-                        theme={dracula}
-                        value={code}
-                        onChange={handleCodeChange}
-                        extensions={language == 'cpp'
-                            ? [cpp(true)]
-                            : (language == 'python'
-                                ? [python(true)]
-                                : [java(true)])}
-                    />
-                </CardBody>
-            </Card>
-            <Card radius='none' className='w-3/6 p-0 h-full bg-white'>
-                <CardHeader className='h-18 items-center bg-gray-900 '>
-                    <div className="main px-4 h-12 p-2 text-center text-white ">Output</div>
-                </CardHeader>
-                <CardBody>
-                    {console.log(output)}
-                </CardBody>
-            </Card>
+                            </Select>
+                            <Button className="border-none h-12" isIconOnly size='sm'>
+                                <LightModeIcon />
+                            </Button>
+                            <Button className="border-none h-12" onClick={compileCode} isIconOnly size='sm'>
+                                <PlayArrowIcon />
+                            </Button>
 
-        </section>
+                        </div>
 
+                    </CardHeader>
+                    <CardBody className='p-0'>
+                        <CodeMirror
+                            className='text-lg'
+                            height='60rem'
+                            theme={dracula}
+                            value={code}
+                            onChange={handleCodeChange}
+                            extensions={language == 'cpp'
+                                ? [cpp(true)]
+                                : (language == 'python'
+                                    ? [python(true)]
+                                    : [java(true)])}
+                        />
+                    </CardBody>
+                </Card>
+                <Card radius='none' className={indexValue=== 2?'lg:relative lg:block lg:w-3/6 w-screen p-0 h-full bg-white':'lg:relative lg:w-3/6 w-screen p-0 h-full bg-white lg:block sm:hidden'}>
+                    <CardHeader className='h-18 items-center bg-gray-900 '>
+                        <div className="main px-4 h-12 p-2 text-center text-white ">Output</div>
+                    </CardHeader>
+                    <CardBody>
+                        {console.log(output)}
+                    </CardBody>
+                </Card>
+
+            </section>
+        </>
     );
 }
 
