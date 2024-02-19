@@ -11,6 +11,8 @@ import Upcoming from './pages/Hackathon/Upcoming';
 import Past from './pages/Hackathon/Past';
 import CodeField from './pages/CodeField/CodeField';
 import MeetUp from './pages/MeetUp/MeetUp';
+import Codeeditor from './pages/Codeeditor/Codeeditor';
+import Compiler from './pages/Codeeditor/codeCompiler'
 
 function App() {
   const navigate = useNavigate();
@@ -27,9 +29,12 @@ function App() {
           <Route path="/hackathons/open" element={<Open />} />
           <Route path="/hackathons/upcoming" element={<Upcoming />} />
           <Route path="/hackathons/past" element={<Past />} />
-
+          
           <Route path="/code-field" element={<CodeField />} />
           <Route path="/meet-ups" element={<MeetUp />} />
+          <Route path="/code-field/codeeditor" element={<Codeeditor/>} />
+          <Route path="/code-field/compiler" element={<Compiler/>} />
+
         </Routes>
         <Footer />
       </NextUIProvider>

@@ -3,6 +3,8 @@ import { Button, Card, CardFooter, CardHeader, Image, Link } from '@nextui-org/r
 import React from 'react'
 import codespace from './Codespace.js';
 
+
+
 const CodeField = () => {
     return (
         <section section className='w-10/12 m-auto my-10'>
@@ -36,11 +38,11 @@ const CodeField = () => {
                                                 </Button>
                                             </SignedOut>
                                             <SignedIn>
+                                                <Link href={item.link}>
                                                 <Button
                                                     className="text-md font-semibold mr-2   "
                                                     as={Link}
                                                     color='primary'
-                                                    href={item.link}
                                                     target='_blank'
                                                     variant={item.availavlity === 'Free' ? 'ghost' : 'light'}
                                                     radius="full"
@@ -49,6 +51,8 @@ const CodeField = () => {
                                                         item.availavlity === 'Free' ? 'Proceed' : 'Purchase'
                                                     }
                                                 </Button>
+                                                </Link>
+                                              
                                             </SignedIn>
                                         </>
                                     </CardFooter>
