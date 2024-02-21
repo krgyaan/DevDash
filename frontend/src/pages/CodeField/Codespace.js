@@ -5,7 +5,7 @@ const codespace = [
         description: 'Web development can range from developing a simple single static page of plain text to complex Web-based Internet applications, electronic businesses, and social network services.',
         availavlity: 'Free',
         image: 'https://img.icons8.com/dusk/512/google-code.png',
-        link: '/code-field/codeeditor'
+        link: '/Codeeditor'
     },
     {
         id: 2,
