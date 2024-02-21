@@ -32,8 +32,8 @@ function App() {
           
           <Route path="/code-field" element={<CodeField />} />
           <Route path="/meet-ups" element={<MeetUp />} />
-          <Route path="/code-field/codeeditor" element={<Codeeditor/>} />
-          <Route path="/code-field/compiler" element={<Compiler/>} />
+          <Route path="/Codeeditor" element={<Codeeditor/>} />
+          <Route path="/compiler" element={<Compiler/>} />
 
         </Routes>
         <Footer />
