@@ -40,8 +40,8 @@ const CodeField = () => {
                                             <SignedIn>
                                                 <Link href={item.link}>
                                                 <Button
-                                                    className="text-md font-semibold mr-2   "
-                                                    as={Link}
+                                                    className="text-md font-semibold mr-2"
+                                                    
                                                     color='primary'
                                                     target='_blank'
                                                     variant={item.availavlity === 'Free' ? 'ghost' : 'light'}

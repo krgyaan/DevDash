@@ -7,7 +7,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { java } from '@codemirror/lang-java';
 import { python } from '@codemirror/lang-python';
 
-// import {lang} from '@uiw/codemirror-extensions-langs'
+
 
 import { useState } from 'react';
 
@@ -19,7 +19,7 @@ const Compiler = () => {
     const [output, setOutput] = useState('');
     const [outputStatusUrl, setoutputStatusUrl] = useState('');
     const [outputUrl, setoutputUrl] = useState('');
-    const[indexValue,setIndexvalue] = useState(1)
+    const [indexValue, setIndexvalue] = useState(1)
 
     const handleLanguageChange = (newLanguage) => {
         setLanguage(newLanguage);
@@ -31,12 +31,7 @@ const Compiler = () => {
 
     const compileCode = async () => {
 
-        const body = {
-            lang: language.toUpperCase(),
-            source: code,
-            input: '',
-
-        };
+      
 
         const codeStatusBody = {
             lang: language.toUpperCase(),
@@ -101,7 +96,7 @@ const Compiler = () => {
         }
     }
 
- 
+
 
 
 
@@ -115,37 +110,37 @@ const Compiler = () => {
                 id="pills-tab"
                 role="tablist"
                 data-te-nav-ref>
-                <li role="presentation" onClick={()=>setIndexvalue(1)}>
+                <li role="presentation" onClick={() => setIndexvalue(1)}>
                     <a
                         href="#card1"
-                        className={indexValue===1?"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400":"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"}                        id="pills-home-tab"
+                        className={indexValue === 1 ? "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400" : "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"} id="pills-home-tab"
                         data-te-toggle="pill"
                         data-te-target="#card1"
                         data-te-nav-active
                         role="tab"
                         aria-controls="pills-home"
                         aria-selected="true"
-                    >Home</a
+                    >Code</a
                     >
                 </li>
-                <li role="presentation"  onClick={()=>setIndexvalue(2)}>
+                <li role="presentation" onClick={() => setIndexvalue(2)}>
                     <a
                         href="#card2"
-                        className={indexValue===2?"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400":"my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"}
+                        className={indexValue === 2 ? "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400" : "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"}
                         id="pills-profile-tab"
                         data-te-toggle="pill"
                         data-te-target="#card2"
                         role="tab"
                         aria-controls="pills-profile"
                         aria-selected="false"
-                    >Profile</a
+                    >Compile</a
                     >
                 </li>
             </ul>
             <section className="h-screen flex w-screen bg-black">
 
 
-                <Card radius='none' className={indexValue===1?'lg:w-3/6 w-full p-0 h-full bg-white z-10':'lg:w-3/6 w-full p-0 h-full lg:bg-white z-10 hidden'}>
+                <Card radius='none' className={indexValue == 1?'lg:w-3/6 w-screen p-0 h-full z-10':'lg:w-3/6 w-screen p-0 h-full lg:bg-white z-10 hidden'}>
                     <CardHeader className='h-18 items-center flex justify-between bg-gray-900 '>
                         <div className="main px-4 h-12 p-2 text-center text-white ">Main</div>
                         <div className="buttons flex h-full gap-4">
@@ -194,7 +189,7 @@ const Compiler = () => {
                         />
                     </CardBody>
                 </Card>
-                <Card radius='none' className={indexValue=== 2?'lg:relative lg:block lg:w-3/6 w-screen p-0 h-full bg-white':'lg:relative lg:w-3/6 w-screen p-0 h-full bg-white lg:block sm:hidden'}>
+                <Card radius='none' className={indexValue == 2 ? 'lg:relative lg:block lg:w-3/6 w-screen p-0 h-full bg-white':'lg:relative lg:w-3/6 w-screen p-0 h-full bg-white lg:block hidden'}>
                     <CardHeader className='h-18 items-center bg-gray-900 '>
                         <div className="main px-4 h-12 p-2 text-center text-white ">Output</div>
                     </CardHeader>
