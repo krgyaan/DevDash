@@ -66,8 +66,7 @@ export default function Navigation() {
                 <SignedIn>
                     <NavbarContent justify="end">
                         <NavbarItem>
-                            {/* <SignOutButton afterSignOutUrl="/" /> */}
-                            {/* <UserButton afterSignOutUrl="/" userProfileUrl='/'/> */}
+                           
                             <Dropdown placement="bottom-end">
                                 <DropdownTrigger>
                                     <Avatar

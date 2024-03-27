@@ -34,3 +34,12 @@ body {
 .CodeMirror-scroll {
     background: #1d1e22;
 }
+
+.no-scroll::-webkit-scrollbar{
+    display: none;
+}
+
+.no-scroll{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

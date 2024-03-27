@@ -6,99 +6,101 @@ import { dracula } from '@uiw/codemirror-themes-all';
 import { cpp } from '@codemirror/lang-cpp';
 import { java } from '@codemirror/lang-java';
 import { python } from '@codemirror/lang-python';
-
-
-
 import { useState } from 'react';
 
 
 const Compiler = () => {
 
     const [code, setCode] = useState('');
-    const [language, setLanguage] = useState('c');
+    const [language, setLanguage] = useState('');
     const [output, setOutput] = useState('');
     const [outputStatusUrl, setoutputStatusUrl] = useState('');
     const [outputUrl, setoutputUrl] = useState('');
     const [indexValue, setIndexvalue] = useState(1)
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleLanguageChange = (newLanguage) => {
-        setLanguage(newLanguage);
-
+        setLanguage(newLanguage.toUpperCase());
     };
     const handleCodeChange = (newCode) => {
         setCode(newCode);
     };
 
-    const compileCode = async () => {
 
-      
+
+
+    const compileCode = async () => {
+        setLoading(true);
 
         const codeStatusBody = {
-            lang: language.toUpperCase(),
-            source: code,
-            input: '',
-            memory_limit: 243232,
-            time_limit: 5,
-            context: { id: 213121 },
-            callback: '',
+            "lang": language,
+            "source": code,
+            "input": "",
+            "memory_limit": 243232,
+            "time_limit": 5,
+            "context": { "id": 213121 },
+            "callback": "https://client.com/callback/"
         };
-
-
-
-        const apiUrl = 'https://api.hackerearth.com/v4/partner/code-evaluation/submissions';
+       console.log(code, language)
+        const apiUrl = 'https://api.hackerearth.com/v4/partner/code-evaluation/submissions/';
         const secretKey = '826d54e2db47c5e1ebba191705dd00bfbcc9a61f';
 
         try {
-
             // Step 1: Submit code for evaluation
             const submissionResponse = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-
+                    'content-type': 'application/json',
+                    'client-secret': secretKey
                 },
-                body: JSON.stringify({ codeStatusBody }),
-
+                body: JSON.stringify(codeStatusBody),
             });
-            console.log("step 1 cleaar")
             const submissionData = await submissionResponse.json();
-            console.log(submissionData);
             setoutputStatusUrl(submissionData.status_update_url);
 
-            // Step 2: Poll for evaluation status
-            const statusResponse = await fetch(outputStatusUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'client-secret': secretKey,
-                },
-            });
 
-            const statusData = await statusResponse.json();
-            console.log(statusData.result.run_status.output);
+            // Step 2: Poll for evaluation status
+            let statusData;
+            do {
+                const statusResponse = await fetch(submissionData.status_update_url, {
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'client-secret': secretKey,
+                    },
+                });
+                statusData = await statusResponse.json();
+                // console.log(statusData)
+
+                // Step 3: Fetch final output
+
+                const finalOutputResponse = await fetch(statusData.result.run_status.output, {
+                    method: 'GET',
+                });
+
+
+                const finalOutput = await finalOutputResponse.text();
+                setOutput(finalOutput);
+
+                console.log('Final output:', finalOutput);
+                setLoading(false);
+
+                // Poll until the evaluation is completed
+            } while (statusData.request_status.code != "REQUEST_COMPLETED");
+
             setoutputUrl(statusData.result.run_status.output);
             setError(statusData.request_status.code);
+            console.log('Output url:', outputUrl);
 
-            // Step 3: Fetch final output
-            const finalOutputResponse = await fetch(outputUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
 
-            const finalOutput = await finalOutputResponse.text();
-            setOutput(finalOutput);
 
-            console.log(finalOutput);
+
+
         } catch (error) {
             console.error('Error during compilation:', error);
         }
-    }
-
-
-
-
+    };
 
 
 
@@ -112,7 +114,7 @@ const Compiler = () => {
                 data-te-nav-ref>
                 <li role="presentation" onClick={() => setIndexvalue(1)}>
                     <a
-                        href="#card1"
+                        
                         className={indexValue === 1 ? "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400" : "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"} id="pills-home-tab"
                         data-te-toggle="pill"
                         data-te-target="#card1"
@@ -120,12 +122,11 @@ const Compiler = () => {
                         role="tab"
                         aria-controls="pills-home"
                         aria-selected="true"
-                    >Code</a
-                    >
+                    >Code</a>
                 </li>
                 <li role="presentation" onClick={() => setIndexvalue(2)}>
                     <a
-                        href="#card2"
+                        
                         className={indexValue === 2 ? "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500  md:mr-4 bg-slate-400" : "my-2 block rounded px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 bg-neutral-100  md:mr-4"}
                         id="pills-profile-tab"
                         data-te-toggle="pill"
@@ -133,14 +134,13 @@ const Compiler = () => {
                         role="tab"
                         aria-controls="pills-profile"
                         aria-selected="false"
-                    >Compile</a
-                    >
+                    >Compile</a>
                 </li>
             </ul>
-            <section className="h-screen flex w-screen bg-black">
+            <section className="h-screen flex w-full bg-black">
 
 
-                <Card radius='none' className={indexValue == 1?'lg:w-3/6 w-screen p-0 h-full z-10':'lg:w-3/6 w-screen p-0 h-full lg:bg-white z-10 hidden'}>
+                <Card radius='none' className={indexValue == 1 ? 'lg:w-3/6 w-screen p-0 h-full z-10' : 'lg:w-3/6 w-screen p-0 h-full lg:bg-white z-10 hidden'}>
                     <CardHeader className='h-18 items-center flex justify-between bg-gray-900 '>
                         <div className="main px-4 h-12 p-2 text-center text-white ">Main</div>
                         <div className="buttons flex h-full gap-4">
@@ -152,14 +152,13 @@ const Compiler = () => {
                                 size='sm'
                                 className="w-40 p-0 h-full"
                             >
-                                {console.log(language)}
-                                <SelectItem key='cpp' value='cpp'>
+                                <SelectItem key='cpp17' value='cpp'>
                                     C++
                                 </SelectItem>
                                 <SelectItem key='python' value='python'>
                                     Python
                                 </SelectItem>
-                                <SelectItem key='java' value='java'>
+                                <SelectItem key='java8' value='java8'>
                                     Java
                                 </SelectItem>
 
@@ -189,18 +188,18 @@ const Compiler = () => {
                         />
                     </CardBody>
                 </Card>
-                <Card radius='none' className={indexValue == 2 ? 'lg:relative lg:block lg:w-3/6 w-screen p-0 h-full bg-white':'lg:relative lg:w-3/6 w-screen p-0 h-full bg-white lg:block hidden'}>
+                <Card radius='none' className={indexValue == 2 ? 'lg:relative lg:block lg:w-3/6 w-screen p-0 h-full bg-white' : 'lg:relative lg:w-3/6 w-screen p-0 h-full bg-white lg:block hidden'}>
                     <CardHeader className='h-18 items-center bg-gray-900 '>
                         <div className="main px-4 h-12 p-2 text-center text-white ">Output</div>
                     </CardHeader>
                     <CardBody>
-                        {console.log(output)}
+                        {loading ? 'Loading...' : output}
                     </CardBody>
                 </Card>
 
             </section>
         </>
-    );
+    )
 }
 
 export default Compiler;

@@ -38,10 +38,10 @@ const CodeField = () => {
                                                 </Button>
                                             </SignedOut>
                                             <SignedIn>
-                                                <Link href={item.link}>
                                                 <Button
                                                     className="text-md font-semibold mr-2"
-                                                    
+                                                    as={Link}
+                                                    href={item.link}
                                                     color='primary'
                                                     target='_blank'
                                                     variant={item.availavlity === 'Free' ? 'ghost' : 'light'}
@@ -51,8 +51,6 @@ const CodeField = () => {
                                                         item.availavlity === 'Free' ? 'Proceed' : 'Purchase'
                                                     }
                                                 </Button>
-                                                </Link>
-                                              
                                             </SignedIn>
                                         </>
                                     </CardFooter>

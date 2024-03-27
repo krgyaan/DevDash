@@ -13,7 +13,7 @@ import CodeField from './pages/CodeField/CodeField';
 import MeetUpHome from './pages/MeetUp/MeetUphome';
 import Codeeditor from './pages/Codeeditor/Codeeditor';
 import Compiler from './pages/Codeeditor/codeCompiler';
-import MeetUp from './pages/MeetUp/MeetUp';
+import MeetUpProvider from './pages/MeetUp/MeetUp';
 
 function App() {
   const navigate = useNavigate();
@@ -23,20 +23,21 @@ function App() {
       <NextUIProvider navigate={navigate}>
         <Navigation />
         <Routes>
-          
+
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/hackathons" element={<Hackathon />} />
           <Route path="/hackathons/open" element={<Open />} />
           <Route path="/hackathons/upcoming" element={<Upcoming />} />
           <Route path="/hackathons/past" element={<Past />} />
-          <Route path="/meet-ups/create-room/:room" element={<MeetUp/>}/>
+          <Route path="/meet-ups/create-room" element={<MeetUpProvider />} />
           <Route path="/code-field" element={<CodeField />} />
-          <Route path="/meet-ups" element={<MeetUpHome/>} />
-          <Route path="/code-field/codeeditor" element={<Codeeditor/>} />
-          <Route path="/code-field/compiler" element={<Compiler/>} />
-
+          <Route path="/codeeditor" element={<Codeeditor />} />
+          <Route path="/compiler" element={<Compiler />} />
+          <Route path="/meet-ups" element={<MeetUpHome />} />
+          
         </Routes>
+        
         <Footer />
       </NextUIProvider>
     </>

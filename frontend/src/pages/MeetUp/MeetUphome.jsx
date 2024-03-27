@@ -4,15 +4,37 @@ import images from "./meetuplist";
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { SignOutButton, SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react"
+import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import {
+    MeetingProvider,
+    MeetingConsumer,
+    useMeeting,
+    useParticipant,
+} from "@videosdk.live/react-sdk";
+import { authToken, createMeeting } from "./api";
+import ReactPlayer from "react-player";
+import MeetUp from "./MeetUp";
 
-import { useState } from "react";
 
-const MeetUpHome = () => {
+
+
+
+
+
+
+const JoinScreen = ({ getMeetingAndToken }) => {
     const { user } = useUser()
     const [value, setValue] = useState(0)
-    console.log(user)   
+    const [meetingId, setMeetingId] = useState(null);
+    const onClick = async () => {
+        await getMeetingAndToken(meetingId);
+    };
+    console.log(user)
 
     return (
+
+
         <section className='w-full items-center justify-evenly flex flex-col-reverse lg:flex lg:flex-row h-full m-auto'>
             <div className="lg:w-3/6 w-full h-screen flex flex-col lg:flex--col lg:h-5/6 lg:justify-evenly ">
                 <div className=" mx-14">
@@ -24,12 +46,14 @@ const MeetUpHome = () => {
 
                 <div className="flex lg:flex-row lg:items-center flex-col-reverse m-14" >
 
-                    <Button className="bg-teal-500 lg:w-48" id="create-form"  radius="none" as={Link} href={`/meet-ups/create-room/${user?.id}`}>
+                    <Button className="bg-teal-500 lg:w-48" onClick={onClick} id="create-form" radius="none">
                         <AddIcon /> Create Meeting
                     </Button>
                     <div className="h-3/5 flex lg:flex-row flex-col w-full items-center justify-between">
-                        <input size="sm" type="text" placeholder="Enter your link" radius='none' className="lg:w-11/12 w-full lg:h-10 h-20 mx-6 px-3 focus:outline-teal-200" />
-                        <Button radius="none" className="text-teal-800 my-5 lg:w-36 w-full bg-teal-100">Join</Button>
+                        <input size="sm" type="text" placeholder="Enter your link" radius='none' className="lg:w-11/12 w-full lg:h-10 h-20 mx-6 px-3 focus:outline-teal-200" onChange={(e) => {
+                             setMeetingId(e.target.value);                            
+                        }} />
+                        <Button radius="none" className="text-teal-800 my-5 lg:w-36 w-full bg-teal-100" onClick={onClick}>Join</Button>
                     </div>
 
                 </div>
@@ -66,4 +90,35 @@ const MeetUpHome = () => {
     )
 }
 
-export default MeetUpHome;
+const Mymeetup = () => {
+    const [meetingId, setMeetingId] = useState(null);
+
+    //Getting the meeting id by calling the api we just wrote
+    const getMeetingAndToken = async (id) => {
+      const meetingId =
+        id == null ? await createMeeting({ token: authToken }) : id;
+      setMeetingId(meetingId);
+    };
+  
+    //This will set Meeting Id to null when meeting is left or ended
+    const onMeetingLeave = () => {
+      setMeetingId(null);      
+      
+    };
+  
+    return authToken && meetingId ? (
+      <MeetingProvider
+        config={{
+          meetingId,
+          micEnabled: true,
+          webcamEnabled: true,
+        }}
+        token={authToken}
+      >
+        <MeetUp meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
+      </MeetingProvider>
+    ) : (
+      <JoinScreen getMeetingAndToken={getMeetingAndToken} />
+    );
+    }
+export default Mymeetup;

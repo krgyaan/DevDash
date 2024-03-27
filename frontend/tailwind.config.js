@@ -14,6 +14,9 @@ export default {
         satoshi: ['Satoshi', 'sans-serif'],
       },
     },
+    rotate: {
+      '360': '360deg',
+    }
   },
   darkMode: "class",
   plugins: [nextui()],
