@@ -57,7 +57,7 @@ export default function Hackathon() {
                             </CardBody>
                             <CardFooter className="justify-between">
                                 <p className="text-md text-black/80">{item.date}</p>
-                                <Button className="text-md text-white font-semibold" variant="shadow" color="success" radius="lg" size="md" as={Link}>
+                                <Button className="text-md text-white font-semibold" variant="shadow" color="success" radius="lg" size="md" as={Link} href="/Hackinfo">
                                     Apply
                                 </Button>
                             </CardFooter>

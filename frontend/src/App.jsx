@@ -14,7 +14,10 @@ import MeetUpHome from './pages/MeetUp/MeetUphome';
 import Codeeditor from './pages/Codeeditor/Codeeditor';
 import Compiler from './pages/Codeeditor/codeCompiler';
 import MeetUpProvider from './pages/MeetUp/MeetUp';
-
+import Profile from './pages/Profile/profile';
+import DetailPage from './pages/userRegister/detailPage';
+import RegsiterForm from './pages/userRegister/regsiterForm';
+import ChatHome from './pages/chat/ChatHome';
 function App() {
   const navigate = useNavigate();
 
@@ -35,9 +38,15 @@ function App() {
           <Route path="/codeeditor" element={<Codeeditor />} />
           <Route path="/compiler" element={<Compiler />} />
           <Route path="/meet-ups" element={<MeetUpHome />} />
-          
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/Hackinfo" element={<DetailPage />} />
+          <Route path="/registerform" element={<RegsiterForm />} />
+          <Route path="/Chat" element={<ChatHome />} />
+
+
+
         </Routes>
-        
+
         <Footer />
       </NextUIProvider>
     </>

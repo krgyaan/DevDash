@@ -23,17 +23,13 @@ import ParticipantView from './ParticipantView';
 
 
 const MeetUpEntry = (props) => {
-    const { toggleMic, toggleWebcam } = useMeeting();
-
+    const { toggleMic, toggleWebcam } = useMeeting()
     const VideoRef = useRef()
     return (
-        <div className=' flex w-full h-screen justify-center items-center '>
-
-
-            <section className='flex flex-col h-4/5 w-3/6 items-center rounded-2xl'>
-
-
-                <div className='flex m-3 h-3/5 w-5/6 justify-cente items-center rounded-3xl overflow-hidden'>
+        <div className='lg:flex w-full lg:h-screen justify-center items-center '>
+            <section className='flex flex-col lg:h-4/5 lg:w-3/6 
+            items-center rounded-2xl'>
+                <div className='flex lg:m-3 h-3/5 m-4 justify-cente items-center rounded-3xl overflow-hidden'>
                     <Webcam ref={VideoRef} />
                 </div>
                 <div className='flex justify-center items-center'>
@@ -47,10 +43,10 @@ const MeetUpEntry = (props) => {
                 </div>
             </section>
 
-            <section className='h-full flex justify-evenly flex-col items-center w-3/6 '>
+            <section className='lg:h-full h-full flex justify-evenly flex-col items-center w-full'>
                 <div className='h-4/5 w-full'>
-                    <div className='w-full flex justify-center text-2xl text-center m-4'>Lets MeetUp</div>
-                    <div className='w-full flex justify-center text-xl text-center'>2 Millions are connected,World is waiting for you</div>
+                    <div className='w-full flex justify-center text-2xl  '>Lets MeetUp</div>
+                    <div className='w-full flex justify-center lg:text-xl text-center'>2 Millions are connected,World is waiting for you</div>
                     <AvatarGroup className='h-14 m-2' size='sm' isBordered>
                         <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
                         <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -59,7 +55,7 @@ const MeetUpEntry = (props) => {
                         <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
                         <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
                     </AvatarGroup>
-                    <div className='w-full flex justify-center m-4' >
+                    <div className='lg:w-full flex justify-center m-4' >
                         <Button radius="full" className='m-2 bg-teal-800' onClick={() => props.joinMeeting()}>
                             Join
                         </Button>
@@ -67,7 +63,7 @@ const MeetUpEntry = (props) => {
                             Full
                         </Button>
                     </div>
-                    <div className='w-full items-center flex justify-evenly'>
+                    <div className='w-full h-48 lg:items-center flex justify-evenly items-start'>
                         <div className='text-md'>Share </div>
                         <Snippet className='w-3/6'>{props.meetingId}</Snippet>
 
@@ -86,10 +82,8 @@ const MeetUp = (props) => {
     const { leave, toggleMic, toggleWebcam } = useMeeting();
     const [chatBox, setchatBox] = useState(true)
     const [joined, setJoined] = useState(null);
-    //Get the method which will be used to join the meeting.
-    //We will also get the participants list to display all participants
+  
     const { join, participants } = useMeeting({
-        //callback for when meeting is joined successfully
         onMeetingJoined: () => {
             setJoined("JOINED");
         }
@@ -225,9 +219,7 @@ const MeetUp = (props) => {
                 </section>
                 ) : null}
                 <section className='flex flex-col items-center rounded-2xl'>
-                    {/* <div className='text-2xl text-white m-7'>
-                        Meeting Id: {props.meetingId}
-                    </div> */}
+                  
                     <div className='flex m-5 h-4/5 justify-center items-center rounded-3xl overflow-hidden'>
                         <ParticipantView
                             participantId={videosParty[0]}

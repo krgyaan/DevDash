@@ -58,7 +58,6 @@ function ParticipantView(props) {
          <video className='w-full h-full object-cover rounded-xl rotate-90' ref={webcamRef} autoPlay></video>
         
       )}
-      {/* {console.log(micRef)} */}
     
       </> 
   
