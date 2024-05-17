@@ -18,6 +18,8 @@ import Profile from './pages/Profile/profile';
 import DetailPage from './pages/userRegister/detailPage';
 import RegsiterForm from './pages/userRegister/regsiterForm';
 import ChatHome from './pages/chat/ChatHome';
+import Contact from './pages/Contact/Contact';
+import ErrorPage from './components/ErrorPage';
 function App() {
   const navigate = useNavigate();
 
@@ -26,9 +28,9 @@ function App() {
       <NextUIProvider navigate={navigate}>
         <Navigation />
         <Routes>
-
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/hackathons" element={<Hackathon />} />
           <Route path="/hackathons/open" element={<Open />} />
           <Route path="/hackathons/upcoming" element={<Upcoming />} />
@@ -43,8 +45,7 @@ function App() {
           <Route path="/registerform" element={<RegsiterForm />} />
           <Route path="/Chat" element={<ChatHome />} />
 
-
-
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
 
         <Footer />

@@ -1,7 +1,7 @@
 import { Link } from '@nextui-org/react'
-import React from 'react'
 
 const Footer = () => {
+    const link = 'https://gyaan.notion.site/Organizing-Hackathons-with-DevDash-1fa792502d20464cb612a93967fe7bab?pvs=4';
     return (
         <div className='flex flex-col items-center text-white site-footer'>
             <div className='flex items-center justify-between lg:flex-row flex-col border-b-1 gap-10 p-5 w-10/12 m-auto'>
@@ -31,7 +31,7 @@ const Footer = () => {
                 <div className="lg:w-1/2  flex flex-row lg:justify-center justify-start gap-5 lg:flex-nowrap flex-wrap">
                     <div className='flex flex-col gap-2'>
                         <h1 className='text-2xl font-bold text-slate-300'>Community</h1>
-                        <a className='text-white text-xl' href="https://gyaan.notion.site/Organizing-Hackathons-with-DevDash-1fa792502d20464cb612a93967fe7bab?pvs=4" target='_blank'>Organize a hackathon</a>
+                        <Link className='text-white text-xl' href={link} target='_blank'>Organize a hackathon</Link>
                         <Link className='text-white text-xl' href="/hackathons">Explore hackathons</Link>
                         <Link className='text-white text-xl' href="/code-of-conduct">Code of Conduct</Link>
                         <Link className='text-white text-xl' href="/brand">Brand Assets</Link>
