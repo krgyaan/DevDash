@@ -1,25 +1,26 @@
 import React from 'react'
-import { Button, Card, CardBody, Divider,Link,Dropdown, DropdownItem, DropdownTrigger, DropdownMenu, Input, Snippet, Textarea, AvatarGroup, Avatar, CardFooter, CardHeader, Image, Code } from '@nextui-org/react'
+import { Button, Card, CardBody, Divider, Link, Dropdown, DropdownItem, DropdownTrigger, DropdownMenu, Input, Snippet, Textarea, AvatarGroup, Avatar, CardFooter, CardHeader, Image, Code } from '@nextui-org/react'
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import '../../index.css'
+import { useParams } from 'react-router-dom';
 
 export default function DetailPage() {
-
+    let detail = useParams()
     return (
         <div>
             <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active  h-3/5">
-                        <img class="d-block w-100  h-1/5 box-border" src="https://d8it4huxumps7.cloudfront.net/uploads/images/663c619d69486_hackon-with-amazon-season-4.jpg?d=1920x1920" alt="First slide" />
+                <div className="carousel-inner">
+                    <div className="carousel-item active  h-3/5">
+                        <img className="d-block w-100  h-1/5 box-border" src="https://d8it4huxumps7.cloudfront.net/uploads/images/663c619d69486_hackon-with-amazon-season-4.jpg?d=1920x1920" alt="First slide" />
                     </div>
-                    <div class="carousel-item h-3/5">
-                        <img class="d-block w-100  h-1/5box-border" src="https://d8it4huxumps7.cloudfront.net/uploads/images/663c61b71881c_hackon-with-amazon-season-4.jpg?d=1920x1920" alt="Second slide" />
+                    <div className="carousel-item h-3/5">
+                        <img className="d-block w-100  h-1/5box-border" src="https://d8it4huxumps7.cloudfront.net/uploads/images/663c61b71881c_hackon-with-amazon-season-4.jpg?d=1920x1920" alt="Second slide" />
                     </div>
-                    <div class="carousel-item h-3/5">
-                        <img class="d-block w-100  h-1/5box-border" src="https://d8it4huxumps7.cloudfront.net/uploads/images/663c61bd3a8a7_hackon-with-amazon-season-4.jpg?d=1920x1920" alt="Third slide" />
+                    <div className="carousel-item h-3/5">
+                        <img className="d-block w-100  h-1/5box-border" src="https://d8it4huxumps7.cloudfront.net/uploads/images/663c61bd3a8a7_hackon-with-amazon-season-4.jpg?d=1920x1920" alt="Third slide" />
                     </div>
                 </div>
             </div>
@@ -35,9 +36,9 @@ export default function DetailPage() {
                                 width={270}
                             />
                             <CardBody className=" pb-0 pt-2 px-4 flex-col">
-                                <p className="text-large uppercase font-bold">HackOn With Amazon - Season 4</p>
+                                <p className="text-large uppercase font-bold">{detail.hackname}</p>
                                 <small className="text-default-500">#Technology #Engineering #CodingChallenge #Hackathon</small>
-                    
+
                             </CardBody>
                         </CardHeader>
                         <CardFooter className='flex'>

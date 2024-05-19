@@ -3,7 +3,12 @@ import { Button, Card, CardBody, CardFooter, Image, Input, Link } from "@nextui-
 import { SearchIcon } from "./SearchIcon";
 import hackathons from './Hackathons.js';
 
+function slugmaker(str) {
+    let slug = str.toLowerCase().replace(/ /g, '-');
+    return slug
+}
 export default function Hackathon() {
+
     return (
         <div className="w-10/12 m-auto">
             <div className="py-10">
@@ -57,7 +62,7 @@ export default function Hackathon() {
                             </CardBody>
                             <CardFooter className="justify-between">
                                 <p className="text-md text-black/80">{item.date}</p>
-                                <Button className="text-md text-white font-semibold" variant="shadow" color="success" radius="lg" size="md" as={Link} href="/Hackinfo">
+                                <Button className="text-md text-white font-semibold" variant="shadow" color="success" radius="lg" size="md" as={Link} href={`/hackinfo/${slugmaker(item.title)}`}>
                                     Apply
                                 </Button>
                             </CardFooter>

@@ -50,7 +50,7 @@ const JoinScreen = ({ getMeetingAndToken }) => {
                         <AddIcon /> Create Meeting
                     </Button>
                     <div className="h-3/5 flex lg:flex-row flex-col w-full items-center justify-between">
-                        <input size="sm" type="text" placeholder="Enter your link" radius='none' className="lg:w-11/12 w-full lg:h-10 h-20 mx-6 px-3 focus:outline-teal-200" onChange={(e) => {
+                        <input size="sm" type="text" placeholder="Enter your link" radius='none' className="lg:w-11/12 w-full lg:h-10 h-20 mx-6 px-3 focus:outline-teal-200 border-teal-800" onChange={(e) => {
                              setMeetingId(e.target.value);                            
                         }} />
                         <Button radius="none" className="text-teal-800 my-5 lg:w-36 w-full bg-teal-100" onClick={onClick}>Join</Button>

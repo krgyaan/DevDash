@@ -41,9 +41,9 @@ function App() {
           <Route path="/compiler" element={<Compiler />} />
           <Route path="/meet-ups" element={<MeetUpHome />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/Hackinfo" element={<DetailPage />} />
+          <Route path="/hackinfo/:hackname" element={<DetailPage />} />
           <Route path="/registerform" element={<RegsiterForm />} />
-          <Route path="/Chat" element={<ChatHome />} />
+          <Route path="/chat" element={<ChatHome />} />
 
           <Route path='*' element={<ErrorPage />} />
         </Routes>
