@@ -10,10 +10,16 @@ import Open from './pages/Hackathon/Open';
 import Upcoming from './pages/Hackathon/Upcoming';
 import Past from './pages/Hackathon/Past';
 import CodeField from './pages/CodeField/CodeField';
-import MeetUp from './pages/MeetUp/MeetUp';
+import MeetUpHome from './pages/MeetUp/MeetUphome';
 import Codeeditor from './pages/Codeeditor/Codeeditor';
-import Compiler from './pages/Codeeditor/codeCompiler'
-
+import Compiler from './pages/Codeeditor/codeCompiler';
+import MeetUpProvider from './pages/MeetUp/MeetUp';
+import Profile from './pages/Profile/profile';
+import DetailPage from './pages/userRegister/detailPage';
+import RegsiterForm from './pages/userRegister/regsiterForm';
+import ChatHome from './pages/chat/ChatHome';
+import Contact from './pages/Contact/Contact';
+import ErrorPage from './components/ErrorPage';
 function App() {
   const navigate = useNavigate();
 
@@ -24,18 +30,24 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-
+          <Route path="/contact" element={<Contact />} />
           <Route path="/hackathons" element={<Hackathon />} />
           <Route path="/hackathons/open" element={<Open />} />
           <Route path="/hackathons/upcoming" element={<Upcoming />} />
           <Route path="/hackathons/past" element={<Past />} />
-          
+          <Route path="/meet-ups/create-room" element={<MeetUpProvider />} />
           <Route path="/code-field" element={<CodeField />} />
-          <Route path="/meet-ups" element={<MeetUp />} />
-          <Route path="/code-field/codeeditor" element={<Codeeditor/>} />
-          <Route path="/code-field/compiler" element={<Compiler/>} />
+          <Route path="/codeeditor" element={<Codeeditor />} />
+          <Route path="/compiler" element={<Compiler />} />
+          <Route path="/meet-ups" element={<MeetUpHome />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/hackinfo/:hackname" element={<DetailPage />} />
+          <Route path="/registerform" element={<RegsiterForm />} />
+          <Route path="/chat" element={<ChatHome />} />
 
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
+
         <Footer />
       </NextUIProvider>
     </>
